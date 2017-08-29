@@ -1,0 +1,24 @@
+{
+  "name": "symmetrical-pancake",
+  "version": "0.1.0",
+  "main": "index.js",
+  "repository": "https://github.com/imccunn/symmetrical-pancake.git",
+  "author": "Ian McCunn <ianmccunn@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "chai": "^4.1.1",
+    "copy-webpack-plugin": "^4.0.1",
+    "eslint": "^4.5.0",
+    "mocha": "^3.5.0",
+    "webpack": "^3.5.5",
+    "webpack-dev-server": "^2.7.1"
+  },
+  "scripts": {
+    "clean": "rm -rf build/",
+    "build:client": "yarn run clean && webpack",
+    "dev": "webpack-dev-server"
+  }
+}

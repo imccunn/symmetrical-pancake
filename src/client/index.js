@@ -1,9 +1,5 @@
-// @ianmccunn
-// MIT
-//
-// Basic canvas animation/player movemnt example.
-// >> WADS + mouse
 
+import Player from './js/Player';
 
 var c = document.getElementById('c');
 var ctx = c.getContext('2d');
@@ -26,7 +22,6 @@ var ny = Math.floor(c.width/20);
 var xPos = 0;
 
 var world = createWorld();
-console.log('world', world)
 
 function createWorld() {
   var x = 3000;
@@ -47,54 +42,20 @@ function createWorld() {
   };
 }
 
-viewPort = {
-  x: world.x / 2,
-  y: world.x / 2,
-  width: WIDTH,
-  height: HEIGHT
-}
-
-// function drawViewport() {
-//   for (var i = viewPort.y, y = 0; y < viewPort.height; i++, y++) {
-//     for (var j = viewPort.x, x = 0; x < viewPort.width; j++, x++) {
-//       if (world.coords[i][j] === 1) {
-//         ctx.fillStyle = '#444';
-//         ctx.fillRect(x, y, 1, 1);
-//       }
-//     }
-//   }
-// }
-
-function updateViewport() {
-  if (player.move) {
-    var angle = Math.atan2(player.newPos.y - player.y, player.newPos.x - player.x);
-
-    var sin = Math.sin(angle) * player.speed.y;
-    var cos = Math.cos(angle) * player.speed.x;
-    viewPort.x += Math.round(cos);
-    viewPort.y += Math.round(sin);
-    if (Math.abs(player.newPos.x - player.x) < 1 && Math.abs(player.newPos.y - player.y) < 1) {
-      player.move = false;
-    }
-  }
-}
-
 function drawGrid() {
+  let xPos = 0;
   for (var i = 0; i < nx; i++) {
     xPos += 20;
     ctx.fillStyle = '#00ff00';
     ctx.fillRect(xPos, 0, 1, c.height);
   }
-  xPos = 0;
-  for (var i = 0; i < nx; i++) {
-    xPos += 20;
+  let yPos = 0;
+  for (var i = 0; i < ny; i++) {
+    yPos += 20;
     ctx.fillStyle = '#00ff00';
-    ctx.fillRect(0, xPos, c.width, 1);
+    ctx.fillRect(0, yPos, c.width, 1);
   }
 }
-
-drawGrid();
-// drawViewport()
 
 var player = {
   form: {
@@ -146,7 +107,7 @@ function setPlayerVec(x, y) {
   player.oldPos = {
     x: player.x,
     y: player.y
-  }
+  };
 }
 
 function movePlayer(evt) {
@@ -208,9 +169,7 @@ function frame() {
   ctx.fillRect(0, 0, WIDTH, HEIGHT);
   // drawViewport();
   pCtx.clearRect(0, 0, p.width, p.height);
-  drawGrid();
   player.updatePlayerPos();
-  updateViewport();
   drawPlayer();
   window.requestAnimationFrame(frame);
 }
